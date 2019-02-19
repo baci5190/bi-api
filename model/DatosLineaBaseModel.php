@@ -107,9 +107,9 @@ class DatosLineaBaseModel
                     "id_indicador" => $idIndicador,
                     "id_nivel_territorial" => $rec['nivelId'],
                     "año" => $lb->año,
-                    "id_departamento" => $rec["nivelId"] == 2 && intval($d[0]) > 0 ? intval($d[0]) : PDO::PARAM_NULL,
-                    "id_municipio" => $rec["nivelId"] == 3 && intval($d[1]) > 0 ? intval($d[1]) : PDO::PARAM_NULL,
-                    "id_poblado" => $rec["nivelId"] == 4 && intval($d[2]) > 0 ? intval($d[2]) : PDO::PARAM_NULL,
+                    "id_departamento" => $rec["nivelId"] == 1 && intval($d[0]) > 0 ? intval($d[0]) : PDO::PARAM_NULL,
+                    "id_municipio" => $rec["nivelId"] == 2 && intval($d[1]) > 0 ? intval($d[1]) : PDO::PARAM_NULL,
+                    "id_poblado" => $rec["nivelId"] == 3 && intval($d[2]) > 0 ? intval($d[2]) : PDO::PARAM_NULL,
                     "valor_relativo" => floatval($d[3]) > 0 ? floatval($d[3]) : PDO::PARAM_NULL,
                     "valor_absoluto" => floatval($d[4]) > 0 ? floatval($d[4]) : PDO::PARAM_NULL,
                     "columnas" => json_encode(["columnas" => array_slice($d, 5)])
@@ -169,7 +169,7 @@ class DatosLineaBaseModel
     }
 
     private function validateRow($r, $nivel, $optHeaders){
-        $colToCheck = $nivel - 2;
+        $colToCheck = $nivel - 1;
         //Si esta llena la casilla correcta de lugar dependiendo del nivel
         if(!empty($r[$colToCheck]) && intval($r[$colToCheck]) > 0){
             //Si esta vacio val_abs y val_rel

@@ -3,6 +3,7 @@ use Luracast\Restler\RestException;
 require_once('./helper/Connection.php');
 require_once('./model/NivelesTerritorialesModel.php');
 require_once('./model/UnidadesMedidaModel.php');
+require_once('./model/DatosSerieHistoricaModel.php');
 
 class IndicadoresModel
 {
@@ -12,6 +13,7 @@ class IndicadoresModel
         $this->pdo = Connection::get()->connect();
         $this->niveles = new NivelesTerritorialesModel();
         $this->unidades = new UnidadesMedidaModel();
+        $this->serieHistorica = new DatosSerieHistoricaModel();
     }
     function get ($id)
     {
@@ -56,16 +58,34 @@ class IndicadoresModel
                 $unidadMedidaValorRel = $this->unidades->get($lineaBase->id_unid_med_valor_relativo);
                 $result["unidad_medida_valor_relativo"] = $unidadMedidaValorRel->descripcion;
                 $result["unidad_medida_valor_absoluto"] = $unidadMedidaValorAbs->descripcion;
-                $result["valor_relativo_linea_base"] = number_format($lineaBase->valor_relativo,2);
-                $result["valor_absoluto_linea_base"] = number_format($lineaBase->valor_absoluto,2);
+                $result["valor_relativo_linea_base"] = $lineaBase->valor_relativo;
+                $result["valor_absoluto_linea_base"] = $lineaBase->valor_absoluto;
                 $result["metodo_calculo_abreviado"] = $lineaBase->formula;
                 $metodoCalculo = $lineaBase->formula;
-                foreach($lineaBase->variables as $v){
-                    //str_replace($metodoCalculo, new RegExp(sprintf("%s\g")$v->inicial))
+                $result["variables"] = []; 
+                foreach($lineaBase->variables->variables as $v){
+                    $unidad = $this->unidades->get($v->id_unidad_medida);
+                    $result["variables"][] = [
+                        "no_variable" => $v->inicial,
+                        "nombre_variable" => $v->nombre,
+                        "unidad_medida" => $unidad->descripcion
+                    ];
+                    $metodoCalculo = preg_replace(sprintf("/%s/", $v->inicial), $v->nombre, $metodoCalculo);
                 }
+                $result["metodo_calculo"] = $metodoCalculo;
+            }
+            $result["serie_historica"] = [];
+            foreach($this->serieHistorica->get($id, 0) as $s){
+                $result["serie_historica"][] = [
+                    "anio_serieh" => $s["ano"],
+                    "valor_relativo_serieh" => $s["valor_relativo"],
+                    "unidad_medida_valor_relativo" => $lineaBase ? $result["unidad_medida_valor_relativo"] : "",
+                    "valor_absoluto_serieh" => $s["valor_absoluto"],
+                    "unidad_medida_valor_absoluto" => $lineaBase ? $result["unidad_medida_valor_absoluto"] : "",
+                ];
             }
         }
-        return $result;
+        return [$result];
     }
 
     function getAll ()

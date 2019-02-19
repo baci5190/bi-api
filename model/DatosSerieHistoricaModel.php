@@ -91,9 +91,9 @@ class DatosSerieHistoricaModel
                     "id_indicador" => $idIndicador,
                     "id_nivel_territorial" => $rec['nivelId'],
                     "año" => intval(trim($d[0])),
-                    "id_departamento" => $rec["nivelId"] == 2 && intval(trim($d[1])) > 0 ? intval(trim($d[1])) : PDO::PARAM_NULL,
-                    "id_municipio" => $rec["nivelId"] == 3 && intval($d[2]) > 0 ? intval(trim($d[2])) : PDO::PARAM_NULL,
-                    "id_poblado" => $rec["nivelId"] == 4 && intval($d[3]) > 0 ? intval($d[3]) : PDO::PARAM_NULL,
+                    "id_departamento" => $rec["nivelId"] == 1 && intval(trim($d[1])) > 0 ? intval(trim($d[1])) : PDO::PARAM_NULL,
+                    "id_municipio" => $rec["nivelId"] == 2 && intval($d[2]) > 0 ? intval(trim($d[2])) : PDO::PARAM_NULL,
+                    "id_poblado" => $rec["nivelId"] == 3 && intval($d[3]) > 0 ? intval($d[3]) : PDO::PARAM_NULL,
                     "valor_relativo" => floatval($d[4]) > 0 ? floatval($d[4]) : PDO::PARAM_NULL,
                     "valor_absoluto" => floatval($d[5]) > 0 ? floatval($d[5]) : PDO::PARAM_NULL
                 ];
@@ -148,7 +148,7 @@ class DatosSerieHistoricaModel
     }
 
     private function validateRow($r, $nivel){
-        $colToCheck = $nivel - 1;
+        $colToCheck = $nivel;
         //Si esta llena la casilla correcta de lugar dependiendo del nivel
         if(!empty($r[$colToCheck]) && intval($r[$colToCheck]) > 0){
             //Si esta vacio val_abs y val_rel
