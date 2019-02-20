@@ -22,7 +22,7 @@ class PoliticasGeneralesModel
        // $stmt->execute();
        $item[] = [
         'id_indicador' =>  1,
-        'tipo' => 'hola'
+        'tipo' => 'politica'
         ];
         // return the result set as an object
         //return $stmt->fetchObject();
@@ -37,7 +37,7 @@ class PoliticasGeneralesModel
         for ($x = 0; $x <= 10; $x++) {
             $items[] = [
                 'id_indicador' =>  $x,
-                'tipo' => 'hola'
+                'tipo' => 'politica ' . $x 
             ];
         } 
             

@@ -22,7 +22,7 @@ class PlanesNacionalesModel
        // $stmt->execute();
        $item[] = [
         'id_plan' =>  1,
-        'descripcion' => 'hola'
+        'descripcion' => 'plan'
         ];
         // return the result set as an object
         //return $stmt->fetchObject();
@@ -37,7 +37,7 @@ class PlanesNacionalesModel
         for ($x = 0; $x <= 10; $x++) {
             $items[] = [
                 'id_plan' =>  $x,
-                'descripcion' => 'hola'
+                'descripcion' => 'plan Nacional ' . $x 
             ];
         } 
             

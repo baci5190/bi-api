@@ -25,7 +25,7 @@ class MetasEstrategicasModel
         'id_meta_estrategica' => 1,
         'nombre_meta_estrategica' => 'nombre',
         'codigo_interno_med' => 'codigo',
-        'codigo_interno_resultado' => 'sadfa'
+        'codigo_interno_resultado' => 'codigo123'
         ];
         // return the result set as an object
         //return $stmt->fetchObject();
@@ -42,8 +42,8 @@ class MetasEstrategicasModel
                 'id_resultado' =>  $x,
                 'id_meta_estrategica' => $x,
                 'nombre_meta_estrategica' => 'nombre',
-                'codigo_interno_med' => 'codigo',
-                'codigo_interno_resultado' => 'sadfa'
+                'codigo_interno_med' => 'CDD123' . $x ,
+                'codigo_interno_resultado' => 'ABBCCCDD' . $x 
             ];
         } 
             

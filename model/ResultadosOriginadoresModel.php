@@ -11,57 +11,29 @@ class ResultadosOriginadoresModel
     }
     function get ($id)
     {
-        /*
-        // prepare SELECT statement
-        $stmt = $this->pdo->prepare('SELECT *
-                                       FROM med.lista_resultado_med_indicador()
-                                      WHERE id = :id');
-        // bind value to the :id parameter
+      // prepare SELECT statement
+        $stmt = $this->pdo->prepare('SELECT * FROM banco_indicadores.tbl_resultados_originadores WHERE id = :id');
+            // bind value to the :id parameter
         $stmt->bindValue(':id', $id);
-        
+
         // execute the statement
         $stmt->execute();
- 
+
         // return the result set as an object
         return $stmt->fetchObject();
-        */
     }
 
     function getAll ()
     {
-        $data = [
-            [
-            "id_resultado" => 1,
-            "nombre" => "RESULTADO 1",
-            "tipo" => 'Final',
-            "codigo_interno" => "RES1"
-            ],
-            [
-            "id_resultado" => 2,
-            "nombre" => "RESULTADO 2",
-            "tipo" => 'Intermedio',
-            "codigo_interno" => "RES2"
-            ],
-            [
-            "id_resultado" => 3,
-            "nombre" => "RESULTADO 3",
-            "tipo" => 'Final',
-            "codigo_interno" => "RES3"
-            ],
-            [
-            "id_resultado" => 4,
-            "nombre" => "RESULTADO 4",
-            "tipo" => 'Final',
-            "codigo_interno" => "RES4"
-            ],
-            [
-            "id_resultado" => 5,
-            "nombre" => "RESULTADO 5",
-            "tipo" => 'Intermedio',
-            "codigo_interno" => "RES5"
-            ]
+        $stmt = $this->pdo->query('SELECT * from banco_indicadores.tbl_resultados_originadores');
+        $items = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $items[] = [
+                'id' => $row['id'],
+                'descripcion' => $row['descripcion']
             ];
-        return $data;
+        }   
+        return $items;
         /*
         $stmt = $this->pdo->query('SELECT * from banco_indicadores.tbl_resultados_originadores');
         $items = [];

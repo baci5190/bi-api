@@ -1,6 +1,6 @@
 <?php
 define('ROOT', __DIR__);
-$models = ['Indicadores', 'Productos', 'MetasEstrategicas', 'ObjetivosDesarrollo', 'PoliticasGenerales', 'PlanesNacionales',  'PoliticasPublicas', 'ResultadosOriginadores', 'NivelesTerritoriales','UnidadesMedida', 'TiposFuente','InstrumentosPlanificacion','DatosEstadisticos','IndicadorEstadistica', 'DatosLineaBase', 'DatosSerieHistorica', 'Departamentos', 'Municipios'];
+$models = ['Indicadores', 'Productos', 'PlanesSectorial', 'ListaResultadoMedIndicador', 'ListaPoliticaResultadoMedIndicador', 'ListaMetaEstrategicaResultadoMedInidicador', 'MetasEstrategicas', 'ListaResultadoMedIndicador', 'ObjetivosDesarrollo', 'PoliticasGenerales', 'PlanesNacionales',  'PoliticasPublicas', 'ResultadosOriginadores', 'NivelesTerritoriales','UnidadesMedida', 'TiposFuente','InstrumentosPlanificacion','DatosEstadisticos','IndicadorEstadistica', 'DatosLineaBase', 'DatosSerieHistorica', 'Departamentos', 'Municipios'];
 require_once './helper/functions.php';
 require_once './vendor/restler.php';
 

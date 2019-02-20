@@ -2,7 +2,7 @@
 use Luracast\Restler\RestException;
 require_once('./helper/Connection.php');
 
-class ObjetivosDesarrolloModel
+class PlanesSectorialModel
 {
     private $db;
     function __construct ()
@@ -21,7 +21,7 @@ class ObjetivosDesarrolloModel
         // execute the statement
        // $stmt->execute();
        $item[] = [
-        'id_objetivo' =>  1,
+        'id_plan_sectorial' =>  1,
         'descripcion' => 'plan'
         ];
         // return the result set as an object
@@ -36,8 +36,8 @@ class ObjetivosDesarrolloModel
        // while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
         for ($x = 0; $x <= 10; $x++) {
             $items[] = [
-                'id_objetivo' =>  $x,
-                'descripcion' => 'objetivo'.$x
+                'id_plan_sectorial' =>  $x,
+                'descripcion' => 'sectorial '.$x
             ];
         } 
             

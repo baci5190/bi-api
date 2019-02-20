@@ -24,7 +24,7 @@ class PoliticasPublicasModel
         'id_resultado' =>  1,
         'id_politica' => 1,
         'descripcion_politica' => 'nombre',
-        'codigo_interno_resultado' => 'sadfa'
+        'codigo_interno_resultado' => 'codigo123435'
         ];
         // return the result set as an object
         //return $stmt->fetchObject();
@@ -41,7 +41,7 @@ class PoliticasPublicasModel
                 'id_resultado' =>  $x,
                 'id_politica' => $x,
                 'descripcion_politica' => 'nombre',
-                'codigo_interno_resultado' => 'sadfa'
+                'codigo_interno_resultado' => 'ABB' . $x
             ];
         } 
             
