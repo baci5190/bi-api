@@ -1,6 +1,8 @@
 <?php
 use Luracast\Restler\RestException;
 require_once './model/IndicadoresModel.php';
+require_once './model/InstrumentosPlanificacionModel.php';
+
 class Indicadores
 {
     public $dp;
@@ -8,6 +10,7 @@ class Indicadores
     function __construct()
     {
         $this->dp = new IndicadoresModel();
+        $this->dpa = new InstrumentosPlanificacionModel();
     }
     function index()
     {
@@ -37,6 +40,21 @@ class Indicadores
         return $this->dp->getLineaBase($id);
     }
 
+    //
+    function getInstrumentosPlanificacion($id) {
+        return $this->dpa->get($id);
+    }
+
+    function deleteInstrumentosPlanificacion($id)
+    {
+        return $this->dpa->delete($id);
+    }
+    function postInstrumentosPlanificacion($request_data = NULL)
+    {   
+        return $this->dpa->insert($request_data);
+    }
+
+    //
     function postLineaBase($request_data = NULL)
     {
         return $this->dp->insertLineaBase($request_data);
