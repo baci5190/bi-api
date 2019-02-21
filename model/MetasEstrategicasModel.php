@@ -11,25 +11,19 @@ class MetasEstrategicasModel
     }
     function get ($id)
     {
-        // prepare SELECT statement
-        //$stmt = $this->pdo->prepare('SELECT *
- //                                      FROM banco_indicadores.tbl_tipos_fuente
-   //                                   WHERE id = :id');
-        // bind value to the :id parameter
-     //   $stmt->bindValue(':id', $id);
-        
-        // execute the statement
-       // $stmt->execute();
-       $item[] = [
-        'id_resultado' =>  1,
-        'id_meta_estrategica' => 1,
-        'nombre_meta_estrategica' => 'nombre',
-        'codigo_interno_med' => 'codigo',
-        'codigo_interno_resultado' => 'codigo123'
-        ];
-        // return the result set as an object
-        //return $stmt->fetchObject();
-        return $item;
+       //prepare SELECT statement
+       $stmt = $this->pdo->prepare('select *  from med.lista_meta_estrategica_resultado_med_indicador (:id);');
+       //bind value to the :id parameter
+      $stmt->bindValue(':id', $id);
+      
+     // execute the statement
+     $stmt->execute();
+
+     // return the result set as an object
+     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+        $items = json_decode($row['lista_meta_estrategica_resultado_med_indicador']); 
+        }  
+      return $items;
     }
 
     function getAll ()

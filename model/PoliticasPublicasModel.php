@@ -11,24 +11,18 @@ class PoliticasPublicasModel
     }
     function get ($id)
     {
-        // prepare SELECT statement
-        //$stmt = $this->pdo->prepare('SELECT *
- //                                      FROM banco_indicadores.tbl_tipos_fuente
-   //                                   WHERE id = :id');
-        // bind value to the :id parameter
-     //   $stmt->bindValue(':id', $id);
-        
-        // execute the statement
-       // $stmt->execute();
-       $item[] = [
-        'id_resultado' =>  1,
-        'id_politica' => 1,
-        'descripcion_politica' => 'nombre',
-        'codigo_interno_resultado' => 'codigo123435'
-        ];
-        // return the result set as an object
-        //return $stmt->fetchObject();
-        return $item;
+        //prepare SELECT statement
+        $stmt = $this->pdo->prepare('select * from med.lista_politica_publica_resultado_med_indicador (:id);');
+           //bind value to the :id parameter
+        $stmt->bindValue(':id', $id);
+          
+         // execute the statement
+        $stmt->execute();
+   
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $items = json_decode($row['lista_politica_publica_resultado_med_indicador']); 
+        }  
+          return $items;
     }
 
     function getAll ()

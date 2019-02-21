@@ -12,26 +12,23 @@ class ResultadosOriginadoresModel
     function get ($id)
     {
       // prepare SELECT statement
-        $stmt = $this->pdo->prepare('SELECT * FROM banco_indicadores.tbl_resultados_originadores WHERE id = :id');
+        //$stmt = $this->pdo->prepare('select * from med.lista_resultado_med_indicador (:id);');
             // bind value to the :id parameter
-        $stmt->bindValue(':id', $id);
-
+        //$stmt->bindValue(':id', $id);
+        $items = [];
         // execute the statement
-        $stmt->execute();
-
+        //$stmt->execute();
+        return $items;
         // return the result set as an object
-        return $stmt->fetchObject();
+        //return $stmt->fetchObject();
     }
 
     function getAll ()
     {
-        $stmt = $this->pdo->query('SELECT * from banco_indicadores.tbl_resultados_originadores');
+        $stmt = $this->pdo->query('select * from med.lista_resultado_med_indicador ();');
         $items = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $items[] = [
-                'id' => $row['id'],
-                'descripcion' => $row['descripcion']
-            ];
+            $items = json_decode($row['lista_resultado_med_indicador']); 
         }   
         return $items;
         /*
